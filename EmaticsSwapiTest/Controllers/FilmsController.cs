@@ -1,20 +1,13 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using EmaticsSwapiTest.Models;
+using EmaticsSwapiTest.ViewModels;
 
 namespace EmaticsSwapiTest.Controllers;
 
-public class FilmsController : Controller
+public class FilmsController(ISWApiClient swApiClient) : Controller
 {
-    public FilmsController()
+    public async Task<IActionResult> Index()
     {
-
-    }
-
-    public IActionResult Index()
-    {
-        FilmsViewModel viewModel = new();
+        FilmsViewModel? viewModel = await swApiClient.GetFilms("https://swapi.dev/api/films");
         return View(viewModel);
     }
-
 }

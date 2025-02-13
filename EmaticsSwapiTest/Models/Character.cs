@@ -1,6 +1,6 @@
-namespace EmaticsSwapiTest.Swapi.Models
+namespace EmaticsSwapiTest.Models
 {
-    public class Film
+    public class Character
     {
 
     }

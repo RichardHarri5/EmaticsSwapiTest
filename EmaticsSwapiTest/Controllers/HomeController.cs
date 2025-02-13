@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using EmaticsSwapiTest.Models;
+using EmaticsSwapiTest.ViewModels;
 
 namespace EmaticsSwapiTest.Controllers;
 

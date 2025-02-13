@@ -1,11 +1,20 @@
-﻿namespace EmaticsSwapiTest
+﻿using EmaticsSwapiTest.ViewModels;
+
+namespace EmaticsSwapiTest
 {
-    public class SWApiClient : ISWApiClient
+    public class SWApiClient(HttpClient client) : ISWApiClient
     {
-        private readonly HttpClient _httpClient;
-        public SWApiClient(HttpClient httpClient)
+        private HttpClient Client { get; } = client;
+
+        public async Task<FilmsViewModel> GetFilms(string url)
         {
-            _httpClient = httpClient;
+            throw new NotImplementedException();
         }
+
+        public async Task<FilmDetailsViewModel?> GetFilmDetails(string url)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

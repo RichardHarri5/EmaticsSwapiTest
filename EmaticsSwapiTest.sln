@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35806.99 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmaticsSwapiTest", "EmaticsSwapiTest\EmaticsSwapiTest.csproj", "{B9B07AAE-15A0-4345-B532-F04E46818ACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmaticsSwapiTestTests", "EmaticsSwapiTestTests\EmaticsSwapiTestTests.csproj", "{BC7926A6-9F36-4A79-9871-F11A9A7C1E50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC7926A6-9F36-4A79-9871-F11A9A7C1E50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC7926A6-9F36-4A79-9871-F11A9A7C1E50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC7926A6-9F36-4A79-9871-F11A9A7C1E50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC7926A6-9F36-4A79-9871-F11A9A7C1E50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
