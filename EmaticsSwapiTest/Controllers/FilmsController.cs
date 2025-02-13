@@ -10,11 +10,13 @@ public class FilmsController(ISWApiClient swApiClient) : Controller
         try
         {
             FilmsViewModel? viewModel = await swApiClient.GetFilms("https://swapi.dev/api/films");
-            return View(viewModel);
+            ViewResult result = View("Index", viewModel);
+            result.StatusCode = 200;
+            return result;
         }
         catch
         {
-            return RedirectToAction("Error", "Home");
+            return RedirectToAction("Index", "Error");
         }
     }
 }

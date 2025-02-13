@@ -3,18 +3,18 @@
 namespace EmaticsSwapiTest.Controllers.Tests
 {
     [TestClass()]
-    public class HomeControllerTests
+    public class ErrorControllerTests
     {
         [TestMethod()]
         public void ErrorPageLoadTest()
         {
-            HomeController controller = new();
+            ErrorController controller = new();
 
-            ViewResult? result = controller.Error() as ViewResult;
+            ViewResult? result = controller.Index() as ViewResult;
 
             Assert.IsNotNull(result);
 
-            Assert.AreEqual("Error", result.ViewName);
+            Assert.AreEqual("Index", result.ViewName);
             Assert.AreEqual(200, result.StatusCode);
         }
     }

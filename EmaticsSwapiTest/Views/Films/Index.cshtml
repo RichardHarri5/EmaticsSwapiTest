@@ -1,10 +1,34 @@
 ﻿@using EmaticsSwapiTest.ViewModels
 @model FilmsViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Films List";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table>
+    <thead>
+        <tr>
+            <th>Episode Id</th>
+            <th>Title</th>
+            <th>Release Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (FilmInfo film in Model.FilmsTable)
+        {
+            @using (Html.BeginForm("Index", "FilmDetails", new { FilmUrl = film.FilmUrl }, FormMethod.Post))
+            {
+                <tr onclick="location.href = '@Url.Action("Index", "FilmDetails", new { FilmUrl = film.FilmUrl })'">
+                    <td>
+                        @Html.DisplayFor(_ => film.EpisodeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => film.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(_ => film.ReleaseDate)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

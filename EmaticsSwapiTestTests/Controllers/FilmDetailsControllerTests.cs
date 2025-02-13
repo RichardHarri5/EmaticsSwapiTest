@@ -21,6 +21,71 @@ namespace EmaticsSwapiTest.Controllers.Tests
         }
 
         [TestMethod()]
+        public async Task IndexPageNullUrlTest()
+        {
+            SWApiClient client = new(new());
+            FilmDetailsController controller = new(client);
+
+            RedirectToActionResult? result = await controller.Index(null) as RedirectToActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Error", result.ControllerName);
+        }
+
+        [TestMethod()]
+        public async Task IndexPageEmptyUrlTest()
+        {
+            SWApiClient client = new(new());
+            FilmDetailsController controller = new(client);
+
+            RedirectToActionResult? result = await controller.Index("") as RedirectToActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Error", result.ControllerName);
+        }
+
+        [TestMethod()]
+        public async Task IndexPageBadHostTest()
+        {
+            SWApiClient client = new(new());
+            FilmDetailsController controller = new(client);
+
+            RedirectToActionResult? result = await controller.Index("films/1") as RedirectToActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Error", result.ControllerName);
+        }
+
+        [TestMethod()]
+        public async Task IndexPageBadRouteTest()
+        {
+            SWApiClient client = new(new());
+            FilmDetailsController controller = new(client);
+
+            RedirectToActionResult? result = await controller.Index("https://swapi.dev/api/filmsssssssss") as RedirectToActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Error", result.ControllerName);
+        }
+
+        [TestMethod()]
+        public async Task IndexPageInvalidIdTest()
+        {
+            SWApiClient client = new(new());
+            FilmDetailsController controller = new(client);
+
+            RedirectToActionResult? result = await controller.Index("https://swapi.dev/api/films/9999") as RedirectToActionResult;
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("Index", result.ActionName);
+            Assert.AreEqual("Error", result.ControllerName);
+        }
+
+        [TestMethod()]
         public async Task IndexDataTest()
         {
             SWApiClient client = new(new());

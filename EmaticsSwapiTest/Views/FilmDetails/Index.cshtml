@@ -1,10 +1,49 @@
 ﻿@using EmaticsSwapiTest.ViewModels
 @model FilmDetailsViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Film Details";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@using (Html.BeginForm("Index", "Films", null, FormMethod.Post))
+{
+    <button type="submit">Back To List</button>
+}
+
+<h2>
+    @Html.DisplayFor(_ => Model.Film.Title)
+</h2>
+<div>
+    Episode: @Html.DisplayFor(_ => Model.Film.EpisodeId)
 </div>
+<div>
+    Released: @Html.DisplayFor(_ => Model.Film.ReleaseDate)
+</div>
+<div>
+    Crawl: @Html.DisplayFor(_ => Model.Film.TextCrawl)
+</div>
+
+<h3>
+    @Html.DisplayNameFor(_ => Model.Film.Planets)
+</h3>
+@foreach (PlanetInfo planet in Model.Film.Planets)
+{
+    <h4>
+        @Html.DisplayFor(_ => planet.Name)
+    </h4>
+}
+
+<h3>
+    @Html.DisplayNameFor(filmModel => filmModel.Film.HomeWorlds)
+</h3>
+@foreach (PlanetExtra planet in Model.Film.HomeWorlds)
+{
+    <h4>
+        @Html.DisplayFor(_ => planet.Name)
+    </h4>
+    @foreach (CharacterInfo character in planet.Characters)
+    {
+        <div>
+            @Html.DisplayFor(_ => character.Name)
+        </div>
+    }
+}
