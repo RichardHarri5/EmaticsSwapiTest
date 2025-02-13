@@ -6,7 +6,7 @@ namespace EmaticsSwapiTest.Controllers.Tests
     public class HomeControllerTests
     {
         [TestMethod()]
-        public void HomeControllerTest()
+        public void ErrorPageLoadTest()
         {
             HomeController controller = new();
 
