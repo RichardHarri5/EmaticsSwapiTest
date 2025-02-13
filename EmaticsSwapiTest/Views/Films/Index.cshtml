@@ -4,7 +4,7 @@
     ViewData["Title"] = "Films List";
 }
 
-<table>
+<table class="sortable">
     <thead>
         <tr>
             <th>Episode Id</th>
@@ -25,7 +25,7 @@
                         @Html.DisplayFor(_ => film.Title)
                     </td>
                     <td>
-                        @Html.DisplayFor(_ => film.ReleaseDate)
+                        @Html.DisplayFor(_ => film.ReleaseDateFormatted)
                     </td>
                 </tr>
             }

@@ -65,6 +65,7 @@ namespace EmaticsSwapiTest
                     Title = filmData.Title,
                     EpisodeId = filmData.Episode_Id,
                     ReleaseDate = filmData.Release_Date,
+                    TextCrawl = filmData.Opening_Crawl,
                     FilmUrl = filmData.Url,
                     Planets = [.. planets.Where(p => filmData.Planets.Contains(p.Key, StringComparer.InvariantCultureIgnoreCase)).Select(p => new PlanetInfo() { Name = p.Value.Name })],
                     HomeWorlds = [..
