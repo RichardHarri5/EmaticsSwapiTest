@@ -44,6 +44,7 @@ namespace EmaticsSwapiTest
                 if (c is not null)
                 {
                     characters[characterUrl] = c;
+                    planetUrls.Add(c.HomeWorld);
                 }
             }
 
@@ -64,12 +65,12 @@ namespace EmaticsSwapiTest
                     EpisodeId = filmData.Episode_Id,
                     ReleaseDate = filmData.Release_Date,
                     FilmUrl = filmData.Url,
-                    Planets = [.. planets.Where(p => filmData.Planets.Contains(p.Key, StringComparer.InvariantCultureIgnoreCase)).Select(p => new PlanetInfo(){ Name = p.Value.Name })],
+                    Planets = [.. planets.Where(p => filmData.Planets.Contains(p.Key, StringComparer.InvariantCultureIgnoreCase)).Select(p => new PlanetInfo() { Name = p.Value.Name })],
                     HomeWorlds = [..
                         characters.GroupBy(c => c.Value.HomeWorld)
                             .Select(g =>
                             {
-                                Planet? homeWorld = planets[g.Key.Url];
+                                Planet? homeWorld = planets[g.Key];
                                 return new PlanetExtra
                                 {
                                     Name = homeWorld.Name,
