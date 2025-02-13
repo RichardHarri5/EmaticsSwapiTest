@@ -1,7 +1,7 @@
 namespace EmaticsSwapiTest.Models
 {
-    public class ListResponseBody
+    public class ListResponseBody<TValue>
     {
-        public object[]? Results { get; set; }
+        public TValue[]? Results { get; set; }
     }
 }

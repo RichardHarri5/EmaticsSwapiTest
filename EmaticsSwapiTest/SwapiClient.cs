@@ -35,12 +35,12 @@ namespace EmaticsSwapiTest
             Film? filmData = await GetFilm(url) ?? throw new ArgumentException($"No Data Found For {url}");
 
             HashSet<string>? planetUrls = [.. filmData?.Planets];
-            Dictionary<string, People> characters = [];
+            Dictionary<string, Person> characters = [];
             Dictionary<string, Planet> planets = [];
 
             foreach (string characterUrl in filmData.Characters)
             {
-                People? c = await GetPerson(characterUrl);
+                Person? c = await GetPerson(characterUrl);
                 if (c is not null)
                 {
                     characters[characterUrl] = c;
@@ -86,30 +86,25 @@ namespace EmaticsSwapiTest
         private async Task<Film[]?> GetAllFilms(string url)
         {
             string responseBody = await SendRequest(url);
-            object[]? results = JsonSerializer.Deserialize<ListResponseBody>(responseBody, JsonOptions)?.Results;            
-            if(results is null)
-            {
-                return null;
-            }
-            return Array.ConvertAll(results, item => (Film)item);
+            return JsonSerializer.Deserialize<FilmList>(responseBody, JsonOptions)?.Results;
         }
 
         private async Task<Film?> GetFilm(string url)
         {
             string responseBody = await SendRequest(url);
-            return JsonSerializer.Deserialize<Film?>(responseBody, JsonOptions);
+            return JsonSerializer.Deserialize<Film>(responseBody, JsonOptions);
         }
 
-        private async Task<People?> GetPerson(string url)
+        private async Task<Person?> GetPerson(string url)
         {
             string responseBody = await SendRequest(url);
-            return JsonSerializer.Deserialize<People?>(responseBody, JsonOptions);
+            return JsonSerializer.Deserialize<Person>(responseBody, JsonOptions);
         }
 
         private async Task<Planet?> GetPlanet(string url)
         {
             string responseBody = await SendRequest(url);
-            return JsonSerializer.Deserialize<Planet?>(responseBody, JsonOptions);
+            return JsonSerializer.Deserialize<Planet>(responseBody, JsonOptions);
         }
 
         private async Task<string> SendRequest(string url)
