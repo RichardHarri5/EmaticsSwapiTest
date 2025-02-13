@@ -1,8 +1,8 @@
 namespace EmaticsSwapiTest.Models
 {
-    public class Planet
+    public class People
     {
         public string Name { get; set; }
-        public string Url { get; set; }
+        public Planet HomeWorld { get; set; }
     }
 }

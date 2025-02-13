@@ -12,7 +12,7 @@ namespace EmaticsSwapiTest
 
         public async Task<FilmsViewModel> GetFilms(string url)
         {
-            Film[] filmsData = await GetAllFilms(url);
+            Film[]? filmsData = await GetAllFilms(url) ?? throw new ArgumentException($"No Data Found For {url}");
 
             FilmsViewModel model = new()
             {
@@ -26,33 +26,90 @@ namespace EmaticsSwapiTest
                     })
                 ]
             };
-            return model;
+
+            return model ?? throw new ArgumentException($"Cannot Build View For {url}");
         }
 
         public async Task<FilmDetailsViewModel?> GetFilmDetails(string url)
         {
-            throw new NotImplementedException();
+            Film? filmData = await GetFilm(url) ?? throw new ArgumentException($"No Data Found For {url}");
+
+            HashSet<string>? planetUrls = [.. filmData?.Planets];
+            Dictionary<string, People> characters = [];
+            Dictionary<string, Planet> planets = [];
+
+            foreach (string characterUrl in filmData.Characters)
+            {
+                People? c = await GetPerson(characterUrl);
+                if (c is not null)
+                {
+                    characters[characterUrl] = c;
+                }
+            }
+
+            foreach (string planetUrl in planetUrls)
+            {
+                Planet? p = await GetPlanet(planetUrl);
+                if (p is not null)
+                {
+                    planets[planetUrl] = p;
+                }
+            }
+
+            FilmDetailsViewModel model = new()
+            {
+                Film = new FilmExtra
+                {
+                    Title = filmData.Title,
+                    EpisodeId = filmData.Episode_Id,
+                    ReleaseDate = filmData.Release_Date,
+                    FilmUrl = filmData.Url,
+                    Planets = [.. planets.Where(p => filmData.Planets.Contains(p.Key, StringComparer.InvariantCultureIgnoreCase)).Select(p => new PlanetInfo(){ Name = p.Value.Name })],
+                    HomeWorlds = [..
+                        characters.GroupBy(c => c.Value.HomeWorld)
+                            .Select(g =>
+                            {
+                                Planet? homeWorld = planets[g.Key.Url];
+                                return new PlanetExtra
+                                {
+                                    Name = homeWorld.Name,
+                                    Characters = [.. g.Select(c => new CharacterInfo() { Name = c.Value.Name} )]
+                                };
+                            })
+                    ]
+                }
+            };
+
+            return model ?? throw new ArgumentException($"Cannot Build View For {url}");
         }
 
         private async Task<Film[]?> GetAllFilms(string url)
         {
             string responseBody = await SendRequest(url);
-            return JsonSerializer.Deserialize<Film[]?>(responseBody, JsonOptions);
+            object[]? results = JsonSerializer.Deserialize<ListResponseBody>(responseBody, JsonOptions)?.Results;            
+            if(results is null)
+            {
+                return null;
+            }
+            return Array.ConvertAll(results, item => (Film)item);
         }
 
         private async Task<Film?> GetFilm(string url)
         {
-            throw new NotImplementedException();
+            string responseBody = await SendRequest(url);
+            return JsonSerializer.Deserialize<Film?>(responseBody, JsonOptions);
         }
 
-        private async Task<Character?> GetCharacter(string url)
+        private async Task<People?> GetPerson(string url)
         {
-            throw new NotImplementedException();
+            string responseBody = await SendRequest(url);
+            return JsonSerializer.Deserialize<People?>(responseBody, JsonOptions);
         }
 
         private async Task<Planet?> GetPlanet(string url)
         {
-            throw new NotImplementedException();
+            string responseBody = await SendRequest(url);
+            return JsonSerializer.Deserialize<Planet?>(responseBody, JsonOptions);
         }
 
         private async Task<string> SendRequest(string url)
