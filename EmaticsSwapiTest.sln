@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmaticsSwapiTest", "EmaticsSwapiTest\EmaticsSwapiTest.csproj", "{B9B07AAE-15A0-4345-B532-F04E46818ACF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B07AAE-15A0-4345-B532-F04E46818ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E1B198F-3BD3-4F39-87FD-550EC1F00CBF}
+	EndGlobalSection
+EndGlobal
