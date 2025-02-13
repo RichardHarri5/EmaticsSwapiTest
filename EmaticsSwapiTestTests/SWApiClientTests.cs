@@ -6,20 +6,42 @@ namespace EmaticsSwapiTest.Tests
     public class SWApiClientTests
     {
         [TestMethod()]
-        public async Task GetFilmsBadHostTest()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetFilmsNullTest()
         {
             SWApiClient client = new(new());
-            FilmsViewModel? films = await client.GetFilms("films");
-            Assert.IsNull(films);
+            _ = await client.GetFilms(null);
+
+            Assert.Fail();
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetFilmsEmptyTest()
+        {
+            SWApiClient client = new(new());
+            _ = await client.GetFilms("");
+
+            Assert.Fail();
+        }
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetFilmsBadHostTest()
+        {
+            SWApiClient client = new(new());
+            _ = await client.GetFilms("films");
+
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(HttpRequestException))]
         public async Task GetFilmsBadRouteTest()
         {
             SWApiClient client = new(new());
-            FilmsViewModel? films = await client.GetFilms("https://swapi.dev/api/filmsssssssss");
+            _ = await client.GetFilms("https://swapi.dev/api/filmsssssssss");
 
-            Assert.IsNull(films);
+            Assert.Fail();
         }
 
         [TestMethod()]
@@ -40,29 +62,53 @@ namespace EmaticsSwapiTest.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetFilmDetailsNullTest()
+        {
+            SWApiClient client = new(new());
+            _ = await client.GetFilmDetails(null);
+
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetFilmDetailsEmptyTest()
+        {
+            SWApiClient client = new(new());
+            _ = await client.GetFilmDetails("");
+
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
         public async Task GetFilmDetailsBadHostTest()
         {
             SWApiClient client = new(new());
-            FilmDetailsViewModel? film = await client.GetFilmDetails("films/1");
-            Assert.IsNull(film);
+            _ = await client.GetFilmDetails("films/1");
+
+            Assert.Fail();
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(HttpRequestException))]
         public async Task GetFilmDetailsBadRouteTest()
         {
             SWApiClient client = new(new());
-            FilmDetailsViewModel? film = await client.GetFilmDetails("https://swapi.dev/api/filmsssssssss/1");
+            _ = await client.GetFilmDetails("https://swapi.dev/api/filmsssssssss/1");
 
-            Assert.IsNull(film);
+            Assert.Fail();
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(HttpRequestException))]
         public async Task GetFilmDetailsInvalidIdTest()
         {
             SWApiClient client = new(new());
-            FilmDetailsViewModel? film = await client.GetFilmDetails("https://swapi.dev/api/films/999999");
+            _ = await client.GetFilmDetails("https://swapi.dev/api/films/999999");
 
-            Assert.IsNull(film);
+            Assert.Fail();
         }
 
         [TestMethod()]

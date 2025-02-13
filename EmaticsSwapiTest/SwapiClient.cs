@@ -1,6 +1,7 @@
 ﻿using EmaticsSwapiTest.Models;
 using EmaticsSwapiTest.ViewModels;
 using Microsoft.AspNetCore.Http.Json;
+using System;
 using System.Text.Json;
 
 namespace EmaticsSwapiTest

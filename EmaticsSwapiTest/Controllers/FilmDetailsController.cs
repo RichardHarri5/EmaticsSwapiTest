@@ -7,8 +7,15 @@ public class FilmDetailsController(ISWApiClient swApiClient) : Controller
 {
     public async Task<IActionResult> Index(string filmUrl)
     {
-        FilmDetailsViewModel? viewModel = await swApiClient.GetFilmDetails(filmUrl);
-        return View(viewModel);
+        try
+        {
+            FilmDetailsViewModel? viewModel = await swApiClient.GetFilmDetails(filmUrl);
+            return View(viewModel);
+        }
+        catch
+        {
+            return RedirectToAction("Error", "Home");
+        }
     }
 
 }
