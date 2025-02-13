@@ -1,4 +1,4 @@
-namespace EmaticsSwapiTest.Models
+namespace EmaticsSwapiTest.ViewModels
 {
     public class ErrorViewModel
     {
